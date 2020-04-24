@@ -27,16 +27,18 @@ public class AdminClient {
         out.println(groupSectionID);
         String messageInfo = null;
         String messageContent = null;
-        while ((messageInfo = massageReader.readLine()) != null) {
+        if ((messageInfo = massageReader.readLine()) != null) {
             System.out.println(messageInfo);
-            BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
-            messageContent = consoleReader.readLine();
-            if (!"end".equals(messageContent)) {
-                out.println(messageContent);
+            while (true) {
+                BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+                messageContent = consoleReader.readLine();
+                if (!"end".equals(messageContent)) {
+                    out.println(messageContent);
 
-            }else{
-                out.println(messageContent);
-                break;
+                } else {
+                    out.println(messageContent);
+                    break;
+                }
             }
         }
 

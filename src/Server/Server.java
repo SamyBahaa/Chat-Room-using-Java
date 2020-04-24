@@ -38,6 +38,7 @@ public class Server {
                     ServerSocket ss = new ServerSocket(SUBSCRIBE_PORT);
                     while (true) {
                             new SUBSCRIBE_Service(ss.accept(),600 + totalClients++,groupsArrayList).start();
+                            System.out.println("Total Number of clients = "+ totalClients);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -75,14 +76,12 @@ public class Server {
                 BufferedReader groupBR = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
                 String groupSectionID = groupBR.readLine();
                 DatagramSocket clientSocket = new DatagramSocket();
+                String str  = "What is the message to be broadcast?";
+                out.println(str);
                 while (groupSectionID.equals("1")) {
-                    String str  = "What is the message to be broadcast?";
-                    out.println(str);
                     String message = null;
                     Groups Section1 =groupsArrayList.get(0);
-                    System.out.println("Sending data to all client in this group");
                     if ((message=groupBR.readLine())!= null && !message.equals("end")){
-                        System.out.println(message);
                             // convert to byte
                             byte[] sendData = new byte[1024];
                             sendData=message.getBytes();
@@ -99,13 +98,9 @@ public class Server {
                     }
                 }
                 while (groupSectionID.equals("2")) {
-                    String str  = "What is the message to be broadcast?";
-                    out.println(str);
                     String message = null;
                     Groups Section2 =groupsArrayList.get(1);
-                    System.out.println("Sending data to all client in this group");
                     if ((message=groupBR.readLine())!= null && !message.equals("end")){
-                        System.out.println(message);
                         // convert to byte
                         byte[] sendData = new byte[1024];
                         sendData=message.getBytes();
