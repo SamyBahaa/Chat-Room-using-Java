@@ -11,7 +11,7 @@ public class AdminClient {
     public static final int BROADCAST_PORT = 3001;
     public static final String Section_1 = "1";
     public static final String Section_2 = "2";
-//    public static boolean end = false;
+
 
     public static void main(String[] args) throws IOException {
         System.out.println("Welcome, Which group do you want to broadcast your\n" +
@@ -27,14 +27,19 @@ public class AdminClient {
         out.println(groupSectionID);
         String messageInfo = null;
         String messageContent = null;
-        if ((messageInfo = massageReader.readLine()) != null) {
+        while ((messageInfo = massageReader.readLine()) != null) {
             System.out.println(messageInfo);
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
             messageContent = consoleReader.readLine();
+            if (!"end".equals(messageContent)) {
+                out.println(messageContent);
+
+            }else{
+                out.println(messageContent);
+                break;
+            }
         }
-        while (!"end".equals(messageContent)) {
-            out.println(messageContent);
-        }
+
         scanner.close();
         massageReader.close();
         out.close();
